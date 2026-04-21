@@ -1,22 +1,25 @@
-name: Data Pipeline CI  
-on:
-  push:
-    branches:                
-      - main            
+name: Data Pipeline CI
+
+on: [push]
 
 jobs:
   run-pipeline:
-    runs-on: ubuntu-latest          
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3         
+        uses: actions/checkout@v3
+
       - name: Setup Python
-        uses: actions/setup-python@v4      
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.9"    
+          python-version: "3.9"
+
       - name: Install Dependencies
         run: |
-          pip install -r backend/requirements.txt  
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
       - name: Run Pipeline
         run: |
-          python backend/app.py     
+          python backend/app.py
